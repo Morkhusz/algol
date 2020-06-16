@@ -6,9 +6,11 @@ class FizzBuzz
 {
     public function fizzBuzz(string $integers) : string
     {
-        $this->stringContainsOnlyCommaSeparatedIntegers($integers);
-
         return implode(',', array_map(function($integer) {
+            if (!is_numeric($integer)) {
+                throw new InvalidStringException();
+            }
+
             if ($integer % 15 === 0) {
                 return 'FizzBuzz';
             }
@@ -23,20 +25,5 @@ class FizzBuzz
 
             return $integer;
         }, explode(',', $integers)));
-    }
-
-    /**
-     * @return true if passed string contains only comma separated integers
-     * @throws InvalidStringException
-     */
-    private function stringContainsOnlyCommaSeparatedIntegers(string $string) : bool
-    {
-        foreach (explode(',', $string) as $item) {
-            if (!is_numeric($item)) {
-                throw new InvalidStringException();
-            }
-        }
-
-        return true;
     }
 }
