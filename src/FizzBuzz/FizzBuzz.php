@@ -2,28 +2,34 @@
 
 namespace App\FizzBuzz;
 
+use InvalidArgumentException;
+
 class FizzBuzz
 {
-    public function fizzBuzz(string $integers) : string
+    public function fizzBuzz(int $start, int $end) : string
     {
-        return implode(',', array_map(function($integer) {
-            if (!is_numeric($integer)) {
-                throw new InvalidStringException();
+        if ($start > $end) {
+            throw new InvalidArgumentException('The ending number MUST be greater than the starting number');
+        }
+        if ($start < 0 || $end < 0) {
+            throw new InvalidArgumentException('Negative numbers are not allowed');
+        }
+        $fizzBuzz = '';
+        for ($start; $start <= $end; $start++) {
+            $returnValue = '';
+            if ($start % 3 === 0) {
+                $returnValue .= 'Fizz';
+            }
+            if ($start % 5 === 0) {
+                $returnValue .= 'Buzz';
+            }
+            if ($returnValue == '') {
+                $returnValue = $start;
             }
 
-            if ($integer % 15 === 0) {
-                return 'FizzBuzz';
-            }
+            $fizzBuzz .= $returnValue . PHP_EOL;
+        }
 
-            if ($integer % 3 === 0) {
-                return 'Fizz';
-            }
-
-            if ($integer % 5 === 0) {
-                return 'Buzz';
-            }
-
-            return $integer;
-        }, explode(',', $integers)));
+        return $fizzBuzz;
     }
 }
