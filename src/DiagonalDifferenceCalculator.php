@@ -13,45 +13,42 @@ class DiagonalDifferenceCalculator
      */
     public function calc(array $arr) : int
     {
-        if (!is_numeric($arr[0])) {
+        $lineAndColumnCount = array_shift($arr);
+
+        if (!is_numeric($lineAndColumnCount)) {
             throw new InvalidArgumentException(
                 'The first line of the matrix MUST be a single integer representing the size of the rows and columns'
             );
         }
-        if ((count($arr) - 1) !== $arr[0] ) {
+        if (sizeof($arr) !== $lineAndColumnCount ) {
             throw new InvalidArgumentException(
                 'The Lines and Columns size should be equal than the first integer'
             );
         }
         $firstDiagonalSum = 0;
         $secondDiagonalSum = 0;
-        $firstDiagonalLine = 1;
+        $firstDiagonalIndex = 0;
         $firstDiagonalCol = 0;
-        $secondDiagonalLine = 1;
-        $secondDiagonalCol =  $arr[0] - 1;
-        for ($line = 1; $line <= $arr[0]; $line++) {
-            for ($col = 0; $col < $arr[0]; $col++) {
-                if ($line === $firstDiagonalLine && $col === $firstDiagonalCol) {
-                    $firstDiagonalSum += $arr[$line][$col];
-                    $firstDiagonalCol++;
-                    $firstDiagonalLine++;
-                }
-                if ($line === $secondDiagonalLine && $col === $secondDiagonalCol) {
-                    if (count($arr[$line]) !== $arr[0]) {
-                        throw new InvalidArgumentException(
-                            'The Lines and Columns size should be equal than the first integer'
-                        );
-                    }
-                    $secondDiagonalSum += $arr[$line][$col];
-                    $secondDiagonalCol--;
-                    $secondDiagonalLine++;
-                }
+        $secondDiagonalIndex = 0;
+        $secondDiagonalCol = $lineAndColumnCount - 1;
+        foreach ($arr as $line => $columns) {
+            if (sizeof($arr[$line]) !== $lineAndColumnCount) {
+                throw new InvalidArgumentException(
+                    'The Lines and Columns size should be equal than the first integer'
+                );
+            }
+            if ($line === $firstDiagonalIndex) {
+                $firstDiagonalSum += $columns[$firstDiagonalCol];
+                $firstDiagonalCol++;
+                $firstDiagonalIndex++;
+            }
+            if ($line === $secondDiagonalIndex) {
+                $secondDiagonalSum += $columns[$secondDiagonalCol];
+                $secondDiagonalCol--;
+                $secondDiagonalIndex++;
             }
         }
-        if ($firstDiagonalSum - $secondDiagonalSum < 0) {
-            return $secondDiagonalSum - $firstDiagonalSum;
-        }
 
-        return $firstDiagonalSum - $secondDiagonalSum;
+        return abs($firstDiagonalSum - $secondDiagonalSum);
     }
 }

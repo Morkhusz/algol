@@ -40,14 +40,14 @@ class DiagonalDiffTest extends TestCase
     public function shouldCalculateTheDiagonalDifference()
     {
         $arr = [
-            0 => 3,
-            1 => [
+            3,
+            [
                 1, 2, 3
             ],
-            2 => [
+            [
                 4, 5, 6
             ],
-            3 => [
+            [
                 9, 8, 9
             ]
         ];
@@ -61,14 +61,14 @@ class DiagonalDiffTest extends TestCase
     public function shouldThrowExceptionWhenTheFirstLineIsNotASingleInteger()
     {
         $arr = [
-            0 => [1,2],
-            1 => [
+            [1,2],
+            [
                 1, 2, 3
             ],
-            2 => [
+            [
                 4, 5, 6
             ],
-            3 => [
+            [
                 9, 8, 9
             ]
         ];
@@ -84,11 +84,11 @@ class DiagonalDiffTest extends TestCase
     public function shouldThrowExceptionWhenTheNumberOfLinesAreDifferentThanTheFirstInteger()
     {
         $arr = [
-            0 => 3,
-            1 => [
+            3,
+            [
                 1, 2, 3
             ],
-            2 => [
+            [
                 4, 5, 6
             ]
         ];
@@ -104,14 +104,14 @@ class DiagonalDiffTest extends TestCase
     public function shouldThrowExceptionWhenTheNumberOfColumnsAreDifferentThanTheFirstInteger()
     {
         $arr = [
-            0 => 3,
-            1 => [
+            3,
+            [
                 1, 2, 3
             ],
-            2 => [
+            [
                 4, 5
             ],
-            3 => [
+            [
                 9, 8, 9
             ]
         ];
