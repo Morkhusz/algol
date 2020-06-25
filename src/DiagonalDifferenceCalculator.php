@@ -27,26 +27,14 @@ class DiagonalDifferenceCalculator
         }
         $firstDiagonalSum = 0;
         $secondDiagonalSum = 0;
-        $firstDiagonalIndex = 0;
-        $firstDiagonalCol = 0;
-        $secondDiagonalIndex = 0;
-        $secondDiagonalCol = $lineAndColumnCount - 1;
-        foreach ($arr as $line => $columns) {
-            if (sizeof($arr[$line]) !== $lineAndColumnCount) {
+        for ($i = 0; $i < $lineAndColumnCount; $i++) {
+            if (sizeof($arr[$i]) !== $lineAndColumnCount) {
                 throw new InvalidArgumentException(
                     'The Lines and Columns size should be equal than the first integer'
                 );
             }
-            if ($line === $firstDiagonalIndex) {
-                $firstDiagonalSum += $columns[$firstDiagonalCol];
-                $firstDiagonalCol++;
-                $firstDiagonalIndex++;
-            }
-            if ($line === $secondDiagonalIndex) {
-                $secondDiagonalSum += $columns[$secondDiagonalCol];
-                $secondDiagonalCol--;
-                $secondDiagonalIndex++;
-            }
+            $firstDiagonalSum += $arr[$i][($i - $lineAndColumnCount) + $lineAndColumnCount];
+            $secondDiagonalSum += $arr[$i][($lineAndColumnCount - 1) - $i];
         }
 
         return abs($firstDiagonalSum - $secondDiagonalSum);
