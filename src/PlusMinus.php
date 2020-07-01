@@ -8,13 +8,12 @@ class PlusMinus
 {
     public function calculate(array $numbers) : array
     {
-        $size = array_shift($numbers);
-        $numbers = array_shift($numbers);
+        list($size, $numbers) = $numbers;
 
-        if (!is_array($numbers) || empty($numbers)) {
+        if (!is_array($numbers) || $numbers === []) {
             throw new InvalidArgumentException('The second array line MUST be another array with the size of the integer on the first line');
         }
-        if (sizeof($numbers) < $size) {
+        if (!$size || sizeof($numbers) < $size) {
             throw new InvalidArgumentException('The size of the elements should be equal to the integer on the first line');
         }
         $fractions = [
