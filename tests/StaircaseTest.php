@@ -38,6 +38,18 @@ STR;
     /**
      * @test
      */
+    public function sizeAndLinesShouldHaveTheSizeOfN()
+    {
+        $staircase = new Staircase();
+        $staircase = explode(PHP_EOL, $staircase->print(4));
+
+        $this->assertCount(4, $staircase);
+        $this->assertEquals(4, strlen($staircase[rand(0, 3)]));
+    }
+
+    /**
+     * @test
+     */
     public function itShouldNotHaveSpacesAfterTheSharpeSymbol()
     {
         $staircase = new Staircase();

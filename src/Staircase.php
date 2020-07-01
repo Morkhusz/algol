@@ -6,11 +6,11 @@ class Staircase
 {
     public function print(int $size)
     {
-        $staircase = [];
+        $staircase = '';
         for($i = 1; $i <= $size; $i++) {
-            $staircase[$i] = str_pad(str_pad('', $size - $i, ' '), $size, '#');
+            $staircase .= str_pad(str_pad('', $size - $i, ' '), $size, '#') . PHP_EOL;
         }
         
-        return implode(PHP_EOL, $staircase);
+        return rtrim($staircase);
     }
 }
