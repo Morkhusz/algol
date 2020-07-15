@@ -14,9 +14,9 @@ class Staircase
 
         $staircase = '';
         for($i = 1; $i < $size; $i++) {
-            $staircase .= str_pad(str_pad('', $size - $i, ' '), $size, '#') . PHP_EOL;
+            $staircase .= str_pad(str_repeat(' ', $size - $i), $size, '#') . PHP_EOL;
         }
         
-        return $staircase .= str_pad(str_pad('', $size - $size, ' '), $size, '#');
+        return $staircase .= str_pad(str_repeat(' ', $size - $size), $size, '#');
     }
 }
