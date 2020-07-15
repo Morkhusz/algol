@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\PlusMinus;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use App\PlusMinus;
+use App\PlusMinus\PlusMinus;
 
 class PlusMinusTest extends TestCase
 {

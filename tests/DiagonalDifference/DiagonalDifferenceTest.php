@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests;
+namespace Tests\DiagonalDifference;
 
-use App\DiagonalDifferenceCalculator;
+use App\DiagonalDifference\DiagonalDifferenceCalculator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class DiagonalDiffTest extends TestCase
+class DiagonalDifferenceTest extends TestCase
 {
     /**
      * @test
