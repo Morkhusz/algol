@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Staircase;
+use App\Staircase\Staircase;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
