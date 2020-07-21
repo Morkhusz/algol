@@ -15,23 +15,23 @@ class BirthdayCakeCandles
         list($candlesQuantity, $candles) = $candles;
         $candles = explode(' ', $candles);
         $this->validate($candlesQuantity, $candles);
-
-        return array_reduce($candles, function ($accumulator, $item) {
-            if ($accumulator === null || $item > $accumulator['item']) {
-                $accumulator['item'] = $item;
-                $accumulator['counter'] = 1;
+        $counter = 0;
+        array_reduce($candles, function ($accumulator, $item) use (&$counter) {
+            if ($accumulator === null || $item > $accumulator) {
+                $accumulator = $item;
+                $counter = 1;
 
                 return $accumulator;
             }
-
-            if ($item < $accumulator['item']) {
+            if ($item < $accumulator) {
                 return $accumulator;
             }
-
-            ++$accumulator['counter'];
+            ++$counter;
 
             return $accumulator;
-        })['counter'];
+        });
+
+        return $counter;
     }
 
     private function validate($candlesQuantity, $candles)
