@@ -16,16 +16,7 @@ class TimeConverter
 
             return "$hour:$min:$sec";
         }
-
         $hour = ($hour % 12) + 12;
-        // if ($hour === '12' && $modifier === 'PM') {
-        //     $hour = '12';
-
-        //     return "$hour:$min:$sec";
-
-        // }
-
-        // $hour = $hour + 12;
 
         return "$hour:$min:$sec";
     }
@@ -33,13 +24,13 @@ class TimeConverter
     private function validate($hour, $min, $sec, $modifier)
     {
         if ($modifier !== 'AM' && $modifier !== 'PM') {
-            throw new InvalidArgumentException('');
+            throw new InvalidArgumentException('The last two chars of the string should be the time modifier AM or PM');
         }
         if ($hour > 12 || $hour < 0) {
-            throw new InvalidArgumentException('');
+            throw new InvalidArgumentException('Hour should be between 0 and 12');
         }
         if ($min > 59 || $min < 0 || $sec > 59 || $sec < 0) {
-            throw new InvalidArgumentException('');
+            throw new InvalidArgumentException('Minutes and Seconds should be between 0 and 59');
         }
     }
 }
