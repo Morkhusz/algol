@@ -13,28 +13,42 @@ class BirthdayCakeCandles
             throw new InvalidArgumentException('Input should have two lines with the candles amount and height respectively');
         }
         list($candlesQuantity, $candles) = $candles;
-        $candles = explode(' ', $candles);
         if ($candlesQuantity < 0) {
             throw new InvalidArgumentException('First line should be a positive integer');
         }
-        if (count($candles) != $candlesQuantity) {
-            throw new InvalidArgumentException('The size is different from the first line integer');
-        }
         $counter = 0;
-        array_reduce($candles, function ($accumulator, $item) use (&$counter) {
-            if ($accumulator === null || $item > $accumulator) {
-                $accumulator = $item;
+        $accumulator = 0;
+        $candle = 0;
+        $candlesPresent = 0;
+        for($i = 0; $i < strlen($candles); $i++) {
+            if ($candles[$i] === ' ') {
+                $candle = 0;
+
+                continue;
+            }
+            $candle .= $candles[$i];
+            if (isset($candles[$i + 1]) && $candles[$i + 1] !== ' ') {
+                continue;
+            }
+            ++$candlesPresent;
+
+            if ($candle > $accumulator) {
+                $accumulator = $candle;
                 $counter = 1;
 
-                return $accumulator;
+                continue;
             }
-            if ($item < $accumulator) {
-                return $accumulator;
-            }
-            ++$counter;
 
-            return $accumulator;
-        });
+            if ($candle === $accumulator) {
+                ++$counter;
+
+                continue;
+            }
+        }
+
+        if ($candlesQuantity != $candlesPresent) {
+            throw new InvalidArgumentException('The size is different from the first line integer');
+        }
 
         return $counter;
     }
