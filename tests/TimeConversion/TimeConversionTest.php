@@ -50,7 +50,7 @@ class TimeConversionTest extends TestCase
     public function wrongTimeProvider()
     {
         return [
-            ['13:00:00AM', 'Hour should be between 0 and 12'],
+            ['13:00:00AM', 'Hour should be between 1 and 12'],
             ['10:61:00AM', 'Minutes and Seconds should be between 0 and 59'],
             ['10:00:70AM', 'Minutes and Seconds should be between 0 and 59'],
             ['10:00:70', 'The last two chars of the string should be the time modifier AM or PM']
